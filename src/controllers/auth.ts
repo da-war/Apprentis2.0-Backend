@@ -268,34 +268,37 @@ export const grantValid: RequestHandler = async (req, res) => {
 };
 
 export const updatePassword: RequestHandler = async (req, res) => {
-  /**
-1. Read user id, reset pass token and password.
-2. Validate all these things.
-3. If valid find user with the given id.
-4. Check if user is using same password.
-5. If there is no user or user is using the same password send error res.
-6. Else update new password.
-7. Remove password reset token.
-8. Send confirmation email.
-9. Send response back. 
-  **/
+  const { oldPassword, newPassword } = req.body;
+  const userId = req.user.id;
 
-  const { id, password } = req.body;
+  // Validate the passwords
+  if (!oldPassword || !newPassword) {
+    return sendErrorRes(res, "Old and new passwords are required!", 422);
+  }
 
-  const user = await UserModel.findById(id);
-  if (!user) return sendErrorRes(res, "Unauthorized access!", 403);
+  // Find the user by id
+  const user = await UserModel.findById(userId);
+  if (!user) {
+    return sendErrorRes(res, "User not found!", 404);
+  }
 
-  const matched = await user.comparePassword(password);
-  if (matched)
+  // Check if the old password matches the current password
+  const isMatched = await user.comparePassword(oldPassword);
+  if (!isMatched) {
+    return sendErrorRes(res, "Old password is incorrect!", 403);
+  }
+
+  // Check if the new password is different from the old password
+  const isSamePassword = await user.comparePassword(newPassword);
+  if (isSamePassword) {
     return sendErrorRes(res, "The new password must be different!", 422);
+  }
 
-  user.password = password;
+  // Update the password to the new password
+  user.password = newPassword;
   await user.save();
 
-  await PasswordResetTokenModel.findOneAndDelete({ owner: user._id });
-
-  await mail.sendPasswordUpdateMessage(user.email);
-  res.json({ message: "Password resets successfully." });
+  res.json({ message: "Password updated successfully." });
 };
 
 export const updateProfile: RequestHandler = async (req, res) => {

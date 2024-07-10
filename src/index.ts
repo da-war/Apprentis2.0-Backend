@@ -149,6 +149,6 @@ app.use("*", (req, res) => {
   sendErrorRes(res, "Not Found!", 404);
 });
 
-server.listen(8000, () => {
-  console.log("The app is running on http://localhost:8000");
+server.listen(3000, () => {
+  console.log("The app is running on http://localhost:3000");
 });

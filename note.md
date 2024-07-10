@@ -202,9 +202,9 @@ const passwordRegex =
 
 ```
 
-# Product
+# Job
 
-The interface for products.
+The interface for jobs.
 
 ```
 type productImage = { url: string; id: string };
@@ -221,7 +221,7 @@ export interface ProductDocument extends Document {
 }
 ```
 
-## Product Routes
+## Job Routes
 
 ```
 productRouter.post("/list");
