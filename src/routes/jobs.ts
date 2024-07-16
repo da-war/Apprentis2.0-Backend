@@ -10,7 +10,7 @@ import {
 } from "src/controllers/job";
 
 import { isAuth } from "src/middleware/auth";
-import { validate } from "src/middleware/validator";
+import validate from "src/middleware/validator";
 import { jobSchema } from "src/utils/validationSchema";
 
 const jobRouter = Router();

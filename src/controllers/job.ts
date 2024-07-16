@@ -1,7 +1,7 @@
 import { RequestHandler } from "express";
+import { isValidObjectId } from "mongoose";
 import JobModel from "src/models/job";
 import { sendResponse } from "src/utils/helper";
-import { isValidObjectId } from "mongoose";
 
 export const createJob: RequestHandler = async (req, res) => {
   const {

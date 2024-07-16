@@ -7,3 +7,11 @@ export const sendErrorRes = (
 ) => {
   res.status(statusCode).json({ message });
 };
+
+export const sendResponse = (
+  res: Response,
+  statusCode: number,
+  message: string
+) => {
+  res.status(statusCode).send(message);
+};

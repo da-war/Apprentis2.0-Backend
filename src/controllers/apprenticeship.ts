@@ -1,7 +1,7 @@
 import { RequestHandler } from "express";
-import ApprenticeshipModel from "../models/apprenticeship";
 import { sendResponse } from "../utils/helper";
 import { isValidObjectId } from "mongoose";
+import ApprenticeshipModel from "src/models/apprenticeship";
 
 export const createApprenticeship: RequestHandler = async (req, res) => {
   const {

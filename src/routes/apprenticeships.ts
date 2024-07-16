@@ -1,7 +1,6 @@
 import { Router } from "express";
 
 import { isAuth } from "../middleware/auth";
-import { validate } from "../middleware/validator";
 import { apprenticeshipSchema } from "../utils/validationSchema";
 import {
   createApprenticeship,
@@ -12,6 +11,7 @@ import {
   getLatestApprenticeships,
   updateApprenticeship,
 } from "src/controllers/apprenticeship";
+import validate from "src/middleware/validator";
 
 const apprenticeshipRouter = Router();
 

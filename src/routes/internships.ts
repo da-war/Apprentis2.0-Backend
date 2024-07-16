@@ -1,7 +1,8 @@
 import { Router } from "express";
 
 import { isAuth } from "../middleware/auth";
-import { validate } from "../middleware/validator";
+
+import validate from "src/middleware/validator";
 import {
   createInternship,
   deleteInternship,

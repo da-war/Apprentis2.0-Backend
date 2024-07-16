@@ -14,6 +14,8 @@ import morgan from "morgan";
 import conversationRouter from "./routes/conversation";
 import ConversationModel from "./models/conversation";
 import { updateSeenStatus } from "./controllers/conversation";
+import jobRouter from "./routes/jobs";
+import internshipRouter from "./routes/internships";
 
 const app = express();
 const server = http.createServer(app);
@@ -30,6 +32,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use("/auth", authRouter);
 app.use("/product", productRouter);
 app.use("/conversation", conversationRouter);
+app.use("/job", jobRouter);
+app.use("/internship", internshipRouter);
 
 // SOCKET IO
 io.use((socket, next) => {
